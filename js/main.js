@@ -7,9 +7,15 @@ var avatarString = 'img/avatars/userxx.png';
 var LocationX = randomInteger(20, document.documentElement.clientWidth) - 20; 
 var LocationY = randomInteger(130, 630) - 33;
 var addForm = document.querySelector('.ad-form');
+<<<<<<< HEAD
 //var cardTemplate =  document.querySelector('#card')
     //.content
     //.querySelector('.map__card');
+=======
+var cardTemplate =  document.querySelector('#card')
+    .content
+    .querySelector('.map__card');
+>>>>>>> f33bf9e7b791157b75a867046a009f0f29cf0c5c
 var price = document.querySelector('#price');
 var inputs = document.querySelectorAll('input[type=text]');
 var description = document.querySelector('#description');
@@ -41,7 +47,11 @@ for (var i = 0; i < inputs.length; i++) {
   inputs[i].addEventListener('change', function(){
     inputs = this.value;
 })
+<<<<<<< HEAD
 }
+=======
+};
+>>>>>>> f33bf9e7b791157b75a867046a009f0f29cf0c5c
 
 //строка с описанием,
 description.addEventListener('change', function (evt){
@@ -75,11 +85,19 @@ selectTimeout.value = evt.target.value;
 });
 
 // массив произвольной длинны
+<<<<<<< HEAD
   for (i = 0; i < featuresArr.length; i++) {
       featuresArr[i].onclick = function(evt){
         featuresArrNew.push(evt.target.innerHTML)
       }
     }
+=======
+  for (var i = 0; i < featuresArr.length; i++) {
+      featuresArr[i].onclick = function(evt){
+        featuresArrNew.push(evt.target.innerHTML)
+      }
+    };
+>>>>>>> f33bf9e7b791157b75a867046a009f0f29cf0c5c
  // массив фотографий
 images.addEventListener('click', function(){
   for (var i = 0; i < arrayPhotos.length; i++) {
@@ -98,22 +116,36 @@ function getNewStr (avatarString) {
   arrAvatar[17] = randomInteger(1, 8);  
   avatarString = arrAvatar.join('');
     return avatarString;
+<<<<<<< HEAD
 }
+=======
+};
+>>>>>>> f33bf9e7b791157b75a867046a009f0f29cf0c5c
 
 //функция генерации случайных чисел.
   function randomInteger(min, max) {
     var rand = min + Math.random() * (max + 1 - min);
       return Math.floor(rand);
+<<<<<<< HEAD
   }
+=======
+  };
+>>>>>>> f33bf9e7b791157b75a867046a009f0f29cf0c5c
 
 //функция создания массива из объектов.
 function createArrayUsers (){ 
   var ArrayUsers  = [createObjectUser()];
   for (var i = 1; i < 8; i++) {
     ArrayUsers[i] = createObjectUser(); 
+<<<<<<< HEAD
   }
 return ArrayUsers;
 }
+=======
+  };
+return ArrayUsers;
+};
+>>>>>>> f33bf9e7b791157b75a867046a009f0f29cf0c5c
 console.log(createArrayUsers());
 
 //функция создания объектов.
@@ -142,5 +174,11 @@ var objectUser = new Object (
 }
   )
 return objectUser;
+<<<<<<< HEAD
 }
 
+=======
+};
+ 
+console.log(createObjectUser());
+>>>>>>> f33bf9e7b791157b75a867046a009f0f29cf0c5c

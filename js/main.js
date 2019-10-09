@@ -2,8 +2,8 @@
 
 var mapElement = document.querySelector('.map');
 var typeArr = ['Бунгало', 'Квартира', 'Дом', 'Дворец'];
-var timeinArr = ['После 12', 'После 13', 'После 14'];
-var timeOutArr = ['Выезд до 12', 'Выезд до 13', 'Выезд до 14'];
+var timesinArr = ['После 12', 'После 13', 'После 14'];
+var timesOutArr = ['Выезд до 12', 'Выезд до 13', 'Выезд до 14'];
 var guestsArr = ['для 3 гостей', 'для 2 гостей', 'для 1 гостей', 'не для гостей'];
 var featuresArr = ['1 комната', '2 комнаты', '3 комнаты', '100 комнат'];
 var MAP_PIN_WIDTH = 44;
@@ -14,7 +14,7 @@ var button = document.querySelector('.map__pin');
 var buttonImg = document.querySelector('.map__pin img');
 
 // делаем карту активной.
-mapElement.classList.remove('map--faded');
+  mapElement.classList.remove('map--faded');
 
 
 // Получение рандомного элемента из массива
@@ -56,8 +56,8 @@ function createObjectUser () {
         'description': '',
         'features': randomArr(featuresArr) ,
         'guests': randomArr(guestsArr) ,
-        'checkin': randomArr(timeinArr),
-        'checkout': randomArr(timeOutArr),
+        'checkin': randomArr(timesinArr),
+        'checkout': randomArr(timesOutArr),
         'photos':  arrayPhotos,
        },
     'location': {
@@ -69,6 +69,7 @@ function createObjectUser () {
 }
 
 //вставка элементов;
+function getDocumentFragment () {
 var fragmentPin = document.createDocumentFragment();
   for(var i=0; i<8; i++) {
    var buttonPin = button.cloneNode(true);
@@ -79,3 +80,5 @@ var fragmentPin = document.createDocumentFragment();
     fragmentPin.appendChild(buttonPin);
   }
     map.appendChild(fragmentPin);
+}
+getDocumentFragment ();

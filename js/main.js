@@ -37,7 +37,6 @@ function createArrayUsers (){
   }
 return arrayUsers;
 }
-console.log(createArrayUsers());
 
 //функция создания объектов.
 function createObjectUser () {
@@ -50,7 +49,7 @@ function createObjectUser () {
         'offer': {
         'title': '', 
         'type': '',
-        'address':  locationX, locationY,
+        'address':  locationX + "," + locationY,
         'price': '', 
         'rooms': randomArr(typeArr),
         'description': '',
@@ -69,6 +68,7 @@ function createObjectUser () {
 }
 
 //вставка элементов;
+
 function getDocumentFragment () {
 var fragmentPin = document.createDocumentFragment();
   for(var i=0; i<8; i++) {
@@ -82,3 +82,5 @@ var fragmentPin = document.createDocumentFragment();
     map.appendChild(fragmentPin);
 }
 getDocumentFragment ();
+
+

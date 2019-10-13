@@ -9,7 +9,6 @@ var MAP_PIN_WIDTH = 65;
 var MAP_PIN_HEIGHT = 65;
 var arrayPhotos = ["http://o0.github.io/assets/images/tokyo/hotel1.jpg", "http://o0.github.io/assets/images/tokyo/hotel2.jpg", "http://o0.github.io/assets/images/tokyo/hotel3.jpg"];
 
-
 // Получение рандомного элемента из массива
 function randomArr(arr) {
   var rand = Math.floor(Math.random() * typeArr.length);

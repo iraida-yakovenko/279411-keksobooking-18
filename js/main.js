@@ -1,5 +1,5 @@
 'use strict';
-// делала моки
+
 var typeArr = ['Бунгало', 'Квартира', 'Дом', 'Дворец'];
 var timesinArr = ['После 12', 'После 13', 'После 14'];
 var timesOutArr = ['Выезд до 12', 'Выезд до 13', 'Выезд до 14'];
@@ -126,7 +126,7 @@ function getCoords(elem) {
   };
 }
 
-addressInput.value = getCoords(mainPin).top + Math.floor(MAP_PIN_HEIGHT/2) + ',' + (getCoords(mainPin).left + Math.floor(MAP_PIN_WIDTH/2));
+addressInput.value = Math.floor(getCoords(mainPin).top + MAP_PIN_HEIGHT/2) + ',' + Math.floor((getCoords(mainPin).left + MAP_PIN_WIDTH/2));
 
 
 //Валидация формы: заголовок объявления

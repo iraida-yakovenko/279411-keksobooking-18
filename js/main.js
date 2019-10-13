@@ -205,9 +205,9 @@ var selectCapacity = document.querySelector('#capacity');
 
  function validateForm () {
  var validate = true;
-  if(selectCapacity.options[selectCapacity.selectedIndex].value <= selectRoom.options[selectRoom.selectedIndex].value && selectCapacity.options[selectCapacity.selectedIndex].value != '0') {
+  if(selectCapacity.options[selectCapacity.selectedIndex].value <= selectRoom.options[selectRoom.selectedIndex].value && selectCapacity.options[selectCapacity.selectedIndex].value != '0' && selectRoom.options[selectRoom.selectedIndex].value != '100') {
        validate;
-          } else if(selectCapacity.options[selectCapacity.selectedIndex].value === '0' && selectRoom.options[selectRoom.selectedIndex].value === '100' && selectRoom.options[selectRoom.selectedIndex].value > selectCapacity.options[selectCapacity.selectedIndex].value) {
+          } else if(selectCapacity.options[selectCapacity.selectedIndex].value === '0' && selectRoom.options[selectRoom.selectedIndex].value === '100') {
             validate;
             } 
             else{

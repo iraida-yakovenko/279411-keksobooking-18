@@ -1,6 +1,5 @@
 'use strict';
-
-var mapElement = document.querySelector('.map');
+// делала моки
 var typeArr = ['Бунгало', 'Квартира', 'Дом', 'Дворец'];
 var timesinArr = ['После 12', 'После 13', 'После 14'];
 var timesOutArr = ['Выезд до 12', 'Выезд до 13', 'Выезд до 14'];
@@ -9,18 +8,7 @@ var featuresArr = ['1 комната', '2 комнаты', '3 комнаты', '
 var MAP_PIN_WIDTH = 65;
 var MAP_PIN_HEIGHT = 65;
 var arrayPhotos = ["http://o0.github.io/assets/images/tokyo/hotel1.jpg", "http://o0.github.io/assets/images/tokyo/hotel2.jpg", "http://o0.github.io/assets/images/tokyo/hotel3.jpg"];
-var map = document.querySelector('.map__pins');
-var button = document.querySelector('.map__pin');
-var buttonImg = document.querySelector('.map__pin img');
-var mainPin = document.querySelector('.map__pin--main');
-var formActivity = document.querySelector('.ad-form');
-var formsDisabled = document.querySelectorAll('fieldset');
-var addressInput = document.querySelector('#address');
-var titleInput = document.querySelector('#title');
-var selectTimein = document.querySelector('#timein');
-var selectTimeout = document.querySelector('#timeout');
-var selectRoom = document.querySelector('#room_number');
-var selectCapacity = document.querySelector('#capacity');
+
 
 // Получение рандомного элемента из массива
 function randomArr(arr) {
@@ -71,9 +59,12 @@ function createObjectUser () {
     }
   return objectUser;
 }
+// вставляла элементы
+//вставка элементов;
+var map = document.querySelector('.map__pins');
+var button = document.querySelector('.map__pin');
+var buttonImg = document.querySelector('.map__pin img');
 
-//вставка элементов; Закоментрировала, чтобы проверить активацию страницы
-/*
 function getDocumentFragment () {
 var fragmentPin = document.createDocumentFragment();
   for(var i=0; i<8; i++) {
@@ -87,12 +78,22 @@ var fragmentPin = document.createDocumentFragment();
     map.appendChild(fragmentPin);
 }
 getDocumentFragment ();
-*/
+
 // home work 4
-  for (var i = 0; i < formsDisabled.length; i++) {
-    formsDisabled[i].setAttribute('disabled', 'true');
+//активировала страницу
+var mainPin = document.querySelector('.map__pin--main');
+var formActivity = document.querySelector('.ad-form');
+var formsDisabled = document.querySelectorAll('fieldset');
+var addressInput = document.querySelector('#address');
+var mapElement = document.querySelector('.map');
+
+ function addAttribute (arr) {
+  for (var i = 0; i < arr.length; i++) {
+    arr[i].setAttribute('disabled', 'true');
+    }
   }
-    mainPin.addEventListener('mousedown', function(){
+  addAttribute(formsDisabled);
+      mainPin.addEventListener('mousedown', function(){
       mapElement.classList.remove('map--faded');
       formActivity.classList.remove('ad-form--disabled');
       mapElement.classList.remove('map--faded');
@@ -129,6 +130,8 @@ addressInput.value = getCoords(mainPin).top + Math.floor(MAP_PIN_HEIGHT/2) + ','
 
 
 //Валидация формы: заголовок объявления
+
+var titleInput = document.querySelector('#title');
 
 titleInput.addEventListener('invalid', function (evt) {
   if (titleInput.validity.tooShort) {
@@ -180,35 +183,78 @@ selectTypeOfHous.addEventListener ('change', function(evt){
 });
 
 
+
 //Валидация формы: «Время заезда и выезда»
+
+var selectTimein = document.querySelector('#timein');
+var selectTimeout = document.querySelector('#timeout');
 
 selectTimein.addEventListener ('change', function(evt){
   
-  selectTimein.value = selectTimeout.value = evt.target.value;
+  var target = evt.target.value;
   });
 
 selectTimeout.addEventListener ('change', function(evt){
   
-  selectTimein.value = selectTimeout.value = evt.target.value;
+  var target  = evt.target.value;
   });
 
 //Валидация формы: «Количество комнат» синхронизировано с полем «Количество мест»
-  
-selectRoom.addEventListener('change', function(evt){
-  var  target = evt.target;
+var selectRoom = document.querySelector('#room_number');
+var selectCapacity = document.querySelector('#capacity');
 
-  selectCapacity.addEventListener('change', function(evt){
-    var targetCapacity = evt.target;
+ function validateForm () {
+ var validate = true;
+  if(selectCapacity.options[selectCapacity.selectedIndex].value <= selectRoom.options[selectRoom.selectedIndex].value && selectCapacity.options[selectCapacity.selectedIndex].value != '0') {
+       validate;
+          } else if(selectCapacity.options[selectCapacity.selectedIndex].value === '0' && selectRoom.options[selectRoom.selectedIndex].value === '100' && selectRoom.options[selectRoom.selectedIndex].value > selectCapacity.options[selectCapacity.selectedIndex].value) {
+            validate;
+            } 
+            else{
+              validate = false;
+             }
+   return validate;
+}
+   
+ selectRoom.addEventListener('change', function(evt){
+ var target = evt.target.value;
+  if (validateForm()) {
+  selectRoom.setCustomValidity('');
+  }else if ( target === '1'){  
+    selectRoom.setCustomValidity('1 комната — «для 1 гостя»');
+    
+  }
+  else if ( target === '2'){  
+    selectRoom.setCustomValidity('2 комнаты — «для 2 гостей» или «для 1 гостя»');
+    
+  }else if ( target === '3'){  
+    selectRoom.setCustomValidity('3 комнаты — «для 3 гостей», «для 2 гостей» или «для 1 гостя»');
+    
+  }else if ( target === '100'){  
+    selectRoom.setCustomValidity('100 комнат — «не для гостей»');
+    
+  }
+  });
 
-  
-      if(targetCapacity.value <= target.value && targetCapacity.value != '0') {
-        target.setCustomValidity('');
-          } else if(targetCapacity.value === '0' && target.value === '100' && target.value > targetCapacity.value) {
-            target.setCustomValidity('');
-      } 
-              else{
-              target.setCustomValidity(' 1 комната — «для 1 гостя»; 2 комнаты — «для 2 гостей» или «для 1 гостя»; 3 комнаты — «для 3 гостей», «для 2 гостей» или «для 1 гостя»; 100 комнат — «не для гостей».');
-       }
+ selectCapacity.addEventListener('change', function(evt){
+  var target = evt.target.value;
+  if (validateForm()) {
+  selectCapacity.setCustomValidity('');
+  }else if ( target === '1'){  
+    selectCapacity.setCustomValidity('«для 1 гостя» - 1 комната');
+    
+  }
+  else if ( target === '2'){  
+    selectCapacity.setCustomValidity('«для 2 гостей» - 2 комнаты');
+    
+  }else if ( target === '3'){  
+    selectCapacity.setCustomValidity('«для 3 гостей» - 3 комнаты ');
+    
+  }else if ( target === '0'){  
+    selectCapacity.setCustomValidity('«не для гостей»  - 100 комнат');
+    
+  }        
+ }); 
 
-   });
-});
+
+

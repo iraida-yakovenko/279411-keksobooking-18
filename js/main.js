@@ -58,12 +58,11 @@ function createObjectUser () {
     }
   return objectUser;
 }
-// вставляла элементы
+
 //вставка элементов;
 var map = document.querySelector('.map__pins');
 var button = document.querySelector('.map__pin');
 var buttonImg = document.querySelector('.map__pin img');
-
 function getDocumentFragment () {
 var fragmentPin = document.createDocumentFragment();
   for(var i=0; i<8; i++) {
@@ -254,6 +253,5 @@ var selectCapacity = document.querySelector('#capacity');
     
   }        
  }); 
-
 
 

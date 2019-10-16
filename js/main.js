@@ -13,11 +13,11 @@ var arrayPhotos = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http:/
 
 function randomArr(arr) {
   var rand = Math.floor(Math.random() * arr.length);
-
   return(arr[rand]);
 }
 
 //функция генерации случайных чисел.
+
 
 function randomInteger(min, max) {
   var rand = min + Math.random() * (max + 1 - min);
@@ -34,6 +34,11 @@ function createArrayUsers() {
 return arrayUsers;
 }
 
+  function randomInteger(min, max) {
+    var rand = min + Math.random() * (max + 1 - min);
+      return Math.floor(rand);
+  }
+  
 // массив строк случайной длинны
 
 function arrayStrings(arr) {  
@@ -72,14 +77,11 @@ var objectUser = {
   },
 };
 
-//вставка элементов
-
+//вставка элементов;
 var mapPins = document.querySelector('.map__pins');
 var button = document.querySelector('.map__pin');
 var buttonImg = document.querySelector('.map__pin img');
-var mapCard = document.querySelector('.map__card');
-
-var getDocumentFragment = function() {
+function getDocumentFragment () {
 var fragmentPin = document.createDocumentFragment();
   for(var i=0; i<8; i++) {
    var buttonPin = button.cloneNode(true);
@@ -94,7 +96,6 @@ var fragmentPin = document.createDocumentFragment();
 getDocumentFragment (); 
 
 //DOM - элементы. Карточка объявлений.
-
 var mapFiltersContainer = document.querySelector('.map__filters-container');
 var map = document.querySelector('.map');
 var card = document.querySelector('#card').content.querySelector('.map__card');
@@ -126,12 +127,14 @@ var formsDisabled = document.querySelectorAll('fieldset');
 var addressInput = document.querySelector('#address');
 var mapElement = document.querySelector('.map');
 
-function addAttribute(arr) {
+
+ function addAttribute (arr) {
   for (var i = 0; i < arr.length; i++) {
     arr[i].setAttribute('disabled', 'true');
     }
   }
   addAttribute(formsDisabled);
+
     mainPin.addEventListener('mousedown', function() {
     mapElement.classList.remove('map--faded');
     formActivity.classList.remove('ad-form--disabled');
@@ -154,7 +157,6 @@ mainPin.addEventListener('keydown', function(evt) {
 addressInput.value = getCoords(mainPin).top + Math.floor(MAP_PIN_HEIGHT) + ',' + (getCoords(mainPin).left + Math.floor(MAP_PIN_WIDTH/2));
        }
 });
-
 function getCoords(elem) {
   var box = elem.getBoundingClientRect();
 
@@ -227,12 +229,15 @@ selectTypeOfHous.addEventListener ('change', function(evt){
 var selectTimein = document.querySelector('#timein');
 var selectTimeout = document.querySelector('#timeout');
 
+
 selectTimein.addEventListener ('change', function(evt) {
-  
+
   var target = evt.target.value;
   });
 
+
 selectTimeout.addEventListener ('change', function(evt) {
+
   
   var target  = evt.target.value;
   });
@@ -291,6 +296,5 @@ selectCapacity.addEventListener('change', function(evt) {
             selectCapacity.setCustomValidity('«не для гостей»  - 100 комнат');        
   }        
 }); 
-
 
 

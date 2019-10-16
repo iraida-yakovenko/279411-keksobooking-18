@@ -1,8 +1,10 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Ираида Яковенко](https://up.htmlacademy.ru/javascript/18/user/279411).
-* Наставник: `Неизвестно`.
-
+* Наставник: 
+[Александр
+Чудновский]
+(https://htmlacademy.ru/profile/id29109).
 ---
 
 _Не удаляйте и не обращайте внимание на файлы:_<br>

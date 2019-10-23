@@ -2,8 +2,8 @@
 (function(){ //модуль data.js
   var MAP_PIN_WIDTH = 65;
   var MAP_PIN_HEIGHT = 65;
-  var MAP_PIN_ACTIV_WIDTH = 50;
-  var MAP_PIN_ACTIV_HEIGHT = 70;
+  //var MAP_PIN_ACTIV_WIDTH = 50;
+  var MAP_PIN_ACTIV_HEIGHT = 87;
   var COORD_Y_MIN = 130;
   var COORD_Y_MAX = 630
   var typeArr = ['Бунгало', 'Квартира', 'Дом', 'Дворец'];
@@ -89,6 +89,7 @@
   window.data = {
     MAP_PIN_WIDTH : MAP_PIN_WIDTH,
     MAP_PIN_HEIGHT : MAP_PIN_HEIGHT,
+    MAP_PIN_ACTIV_HEIGHT : MAP_PIN_ACTIV_HEIGHT,
     COORD_Y_MIN : COORD_Y_MIN,
     COORD_Y_MAX : COORD_Y_MAX,
     arrayUsers : arrayUsers,

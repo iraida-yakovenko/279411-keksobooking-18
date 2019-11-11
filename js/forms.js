@@ -1,5 +1,5 @@
 'use strict';
-(function(){// модуль forms.js
+//(function(){// модуль forms.js
 
 //активировала страницу;
 var mainPin = document.querySelector('.map__pin--main');
@@ -140,6 +140,8 @@ function validateForm() {
   var validate = true;
   if(selectCapacity.options[selectCapacity.selectedIndex].value <= selectRoom.options[selectRoom.selectedIndex].value && selectCapacity.options[selectCapacity.selectedIndex].value != '0' && selectRoom.options[selectRoom.selectedIndex].value != '100') {
     validate;
+      } else if(selectRoom.options[selectRoom.selectedIndex].value >= selectCapacity.options[selectCapacity.selectedIndex].value && selectCapacity.options[selectCapacity.selectedIndex].value != '0' && selectRoom.options[selectRoom.selectedIndex].value != '100'){
+        validate;
       } else if(selectCapacity.options[selectCapacity.selectedIndex].value === '0' && selectRoom.options[selectRoom.selectedIndex].value === '100') {
         validate;
       } 
@@ -167,7 +169,7 @@ selectRoom.addEventListener('change', function(evt) {
             selectRoom.setCustomValidity('100 комнат — «не для гостей»');   
 }
 });
-
+/*
 selectCapacity.addEventListener('change', function(evt) {
   var target = evt.target.value;
   if (validateForm()) {
@@ -186,7 +188,7 @@ selectCapacity.addEventListener('change', function(evt) {
             selectCapacity.setCustomValidity('«не для гостей»  - 100 комнат');        
   }        
 }); 
-
+*/
 // module4-task3
 
 var buttonsClose = document.querySelectorAll('.popup__close');
@@ -265,11 +267,17 @@ mapElement.removeEventListener('click', buttonClickHandler);
   left: mapElement.offsetLeft - mainPin.offsetWidth/2
 };
 
-//var isDrag = false;
+
+var minY = window.data.COORD_Y_MIN;
+var maxY = window.data.COORD_Y_MAX;
+var minX = 0;
+var maxX = mapElement.offsetWidth;
+
+var isDrag = false;
 
 mainPin.addEventListener('mousedown', function(evt){
   evt.preventDefault();
-  //isDrag = true;
+  isDrag = true;
  
   addressInput.value = Math.floor(getCoords(mainPin).left + window.data.MAP_PIN_WIDTH/2) + ',' + Math.floor(getCoords(mainPin).top + window.data.MAP_PIN_ACTIV_HEIGHT);
   
@@ -294,48 +302,39 @@ function MouseMoveHendler(moveEvt){
     x: moveEvt.clientX,
     y: moveEvt.clientY
   };
+
   // координаты метки с учетом смещения
   mainPin.style.top = (mainPin.offsetTop - shift.y) + 'px';
   mainPin.style.left = (mainPin.offsetLeft - shift.x) + 'px';
  
 // записываем новые координаты в импут
   addressInput.value = Math.floor(mainPin.offsetLeft - shift.x + window.data.MAP_PIN_WIDTH/2) + ',' + Math.floor(mainPin.offsetTop - shift.y + window.data.MAP_PIN_ACTIV_HEIGHT);
-/*
-  if (isDrag) {
-    move(moveEvt);
-  }*/
-}
 
-function MouseUpHendler(upEvt){
-  upEvt.preventDefault();
-  var addres = addressInput.value;
-  //isDrag = false; 
-
-  document.removeEventListener('mousemove', MouseMoveHendler);
-  document.removeEventListener('mouseup', MouseUpHendler);
-}
-  document.addEventListener('mousemove', MouseMoveHendler);
-  document.addEventListener('mouseup', MouseUpHendler);
-});
-
-//ограничиваем перемещение метки
-
-function move(evt) {
+if (isDrag) {
+  console.log(isDrag)
+    move(startCoords);
+  }
+  
+  function move(evt) {
+    //console.log(startCoords.x);
   var newLocation = {
     x: limits.left,
     y: limits.top
-  };
-  if (evt.pageX > limits.right) {
-    newLocation.x = limits.right;
-  } else if (evt.pageX > limits.left) {
-    newLocation.x = evt.pageX;
+  };console.log(newLocation.x);
+  if (evt.y < 130 || evt.y > 630) {
+    
+  return;
+   
   }
-  if (evt.pageY > limits.bottom) {
-    newLocation.y = limits.bottom;
-  } else if (evt.pageY > limits.top) {
-    newLocation.y = evt.pageY;
+
+  if (evt.x < 130 || evt.x > 630){
+    return; 
+   
   }
-  relocate(newLocation);
+ relocate(newLocation);
+   
+  
+  
 }
 
 // размещение mainPin
@@ -346,4 +345,21 @@ function relocate(newLocation) {
   
    
 
-})();
+}
+
+function MouseUpHendler(upEvt){
+  upEvt.preventDefault();
+  var addres = addressInput.value;
+  isDrag = false; 
+
+  document.removeEventListener('mousemove', MouseMoveHendler);
+  document.removeEventListener('mouseup', MouseUpHendler);
+}
+  document.addEventListener('mousemove', MouseMoveHendler);
+  document.addEventListener('mouseup', MouseUpHendler);
+});
+
+//ограничиваем перемещение метки
+
+
+//})();

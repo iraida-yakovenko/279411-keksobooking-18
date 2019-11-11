@@ -1,5 +1,6 @@
 'use strict';
 (function(){ //модуль data.js
+
   var MAP_PIN_WIDTH = 65;
   var MAP_PIN_HEIGHT = 65;
   //var MAP_PIN_ACTIV_WIDTH = 50;
@@ -86,6 +87,8 @@
     return objectUser;
   }
 
+  
+
   window.data = {
     MAP_PIN_WIDTH : MAP_PIN_WIDTH,
     MAP_PIN_HEIGHT : MAP_PIN_HEIGHT,
@@ -98,6 +101,7 @@
     createArrayUsers : createArrayUsers,
     createObjectUser : createObjectUser,
     arrayStrings : arrayStrings,
+    arrayPhotos : arrayPhotos
   };
 
 })();

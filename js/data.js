@@ -87,8 +87,6 @@
     return objectUser;
   }
 
-  
-
   window.data = {
     MAP_PIN_WIDTH : MAP_PIN_WIDTH,
     MAP_PIN_HEIGHT : MAP_PIN_HEIGHT,

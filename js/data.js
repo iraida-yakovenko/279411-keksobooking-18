@@ -3,7 +3,6 @@
 
   var MAP_PIN_WIDTH = 65;
   var MAP_PIN_HEIGHT = 65;
-  //var MAP_PIN_ACTIV_WIDTH = 50;
   var MAP_PIN_ACTIV_HEIGHT = 87;
   var COORD_Y_MIN = 130;
   var COORD_Y_MAX = 630
@@ -86,8 +85,6 @@
       }
     return objectUser;
   }
-
-  
 
   window.data = {
     MAP_PIN_WIDTH : MAP_PIN_WIDTH,

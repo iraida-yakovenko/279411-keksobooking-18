@@ -1,5 +1,5 @@
 'use strict';
-//(function(){// модуль forms.js
+(function(){// модуль forms.js
 
 //активировала страницу;
 var mainPin = document.querySelector('.map__pin--main');
@@ -7,6 +7,33 @@ var formActivity = document.querySelector('.ad-form');
 var formsDisabled = document.querySelectorAll('fieldset');
 var addressInput = document.querySelector('#address');
 var mapElement = document.querySelector('.map');
+var successPopup = document.querySelector('#success').content.querySelector('.success');
+var main = document.querySelector('main');
+formActivity.addEventListener('submit', function (evt) {
+    window.upload(new FormData(formActivity), function (response) {
+      //var fragment = document.createDocumentFragment();
+      formActivity.appendChild(successPopup);
+      formActivity.reset();
+      mainPin.style.left = 570 + 'px';
+      mainPin.style.right = 375 + 'px';
+      addressInput.value = x + ',' + y;
+
+    });
+    evt.preventDefault();
+  });
+
+
+successPopup.addEventListener('click', function(){
+  successPopup.remove();
+});
+
+var ESC_KEYCODE = 27;
+
+document.addEventListener('keydown', function(evt) {
+  if( evt.keyCode === ESC_KEYCODE){ 
+    successPopup.remove();
+  }
+});
 
 
  var addAttribute = function (arr) {
@@ -122,12 +149,15 @@ var selectTimeout = document.querySelector('#timeout');
 selectTimein.addEventListener ('change', function(evt) {
 
   var target = evt.target.value;
+selectTimein.value = selectTimeout.value;
+
+ });
 
   selectTimeout.addEventListener ('change', function(evt) {
 
-    target  = evt.target.value;
+    selectTimeout.value = selectTimein.value;
     
-  });
+ 
   });
 
 
@@ -149,7 +179,7 @@ function validateForm() {
         validate = false;
        }
  return validate;
-}
+};
    
 selectRoom.addEventListener('change', function(evt) {
   var target = evt.target.value;
@@ -218,7 +248,7 @@ for (var i = 0; i < arr.length; i++) {
   }
 };
 
-getDatasetAttr(buttonMapPins, 0);
+getDatasetAttr(buttonMapPins,0);
 getDatasetAttr(buttonMapPinsImg, 0);
 getDatasetAttr(popupMapCards, 1);
 
@@ -260,24 +290,14 @@ mapElement.removeEventListener('click', buttonClickHandler);
 });
 
 // перемещение метки.
-  var limits = {
-  top: window.data.COORD_Y_MIN,
-  right: mapElement.offsetWidth - mainPin.offsetWidth/2,
-  bottom: window.data.COORD_Y_MAX - window.data.MAP_PIN_ACTIV_HEIGHT,
-  left: mapElement.offsetLeft - mainPin.offsetWidth/2
-};
-
 
 var minY = window.data.COORD_Y_MIN;
 var maxY = window.data.COORD_Y_MAX;
 var minX = 0;
 var maxX = mapElement.offsetWidth;
 
-var isDrag = false;
-
 mainPin.addEventListener('mousedown', function(evt){
   evt.preventDefault();
-  isDrag = true;
  
   addressInput.value = Math.floor(getCoords(mainPin).left + window.data.MAP_PIN_WIDTH/2) + ',' + Math.floor(getCoords(mainPin).top + window.data.MAP_PIN_ACTIV_HEIGHT);
   
@@ -285,8 +305,6 @@ var startCoords = {
       x: evt.clientX,
       y: evt.clientY
     };
-
-  
 
 
 function MouseMoveHendler(moveEvt){
@@ -304,62 +322,54 @@ function MouseMoveHendler(moveEvt){
   };
 
   // координаты метки с учетом смещения
-  mainPin.style.top = (mainPin.offsetTop - shift.y) + 'px';
-  mainPin.style.left = (mainPin.offsetLeft - shift.x) + 'px';
+  //mainPin.style.top = (mainPin.offsetTop - shift.y) + 'px';
+  //mainPin.style.left = (mainPin.offsetLeft - shift.x) + 'px';
  
+  var left = mainPin.offsetTop - shift.y;
+  var top = mainPin.offsetLeft - shift.x;
+  var pinMainWidth = mainPin.offsetWidth;
+
+  if (left < (-pinMainWidth / 2)) {
+    left = -pinMainWidth / 2;
+  }
+
+
+  // новые координаты метки
+  if(left > maxY) {
+    left = maxY;
+  }
+
+  if(left < minY) {
+    left = minY;
+  }
+
+  if(top > maxX) {
+    top = maxX;
+  }
+
+  if(top < minX) {
+    top = minX;
+  }
+
+  // координаты метки с учетом смещения
+  mainPin.style.top = left + 'px';
+  mainPin.style.left = top + 'px';
+ 
+
 // записываем новые координаты в импут
   addressInput.value = Math.floor(mainPin.offsetLeft - shift.x + window.data.MAP_PIN_WIDTH/2) + ',' + Math.floor(mainPin.offsetTop - shift.y + window.data.MAP_PIN_ACTIV_HEIGHT);
 
-if (isDrag) {
-  console.log(isDrag)
-    move(startCoords);
-  }
-  
-  function move(evt) {
-    //console.log(startCoords.x);
-  var newLocation = {
-    x: limits.left,
-    y: limits.top
-  };console.log(newLocation.x);
-  if (evt.y < 130 || evt.y > 630) {
-    
-  return;
-   
-  }
-
-  if (evt.x < 130 || evt.x > 630){
-    return; 
-   
-  }
- relocate(newLocation);
-   
-  
-  
-}
-
-// размещение mainPin
-function relocate(newLocation) {
-  mainPin.style.left = newLocation.x + 'px';
-  mainPin.style.top = newLocation.y + 'px';
 };
-  
-   
-
-}
 
 function MouseUpHendler(upEvt){
   upEvt.preventDefault();
   var addres = addressInput.value;
-  isDrag = false; 
 
   document.removeEventListener('mousemove', MouseMoveHendler);
   document.removeEventListener('mouseup', MouseUpHendler);
-}
+};
   document.addEventListener('mousemove', MouseMoveHendler);
   document.addEventListener('mouseup', MouseUpHendler);
 });
 
-//ограничиваем перемещение метки
-
-
-//})();
+})();

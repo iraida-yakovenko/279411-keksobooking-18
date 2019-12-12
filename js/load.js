@@ -1,16 +1,17 @@
 'use strict';
+
 (function(){
 var URL = 'https://js.dump.academy/keksobooking/data';
 
 var load = function(onSuccess, onError) {
 var xhr = new XMLHttpRequest();
 
-xhr.ResponseType = 'json';
+xhr.responseType = 'json';
 
 xhr.open('GET', 'https://js.dump.academy/keksobooking/data');
 
 xhr.addEventListener('load', function() {
-	//console.log(JSON.parse(xhr.responseText));
+
 	if (xhr.status === 200) {
 
         onSuccess(xhr.response);
@@ -36,22 +37,4 @@ xhr.send();
 
 };
 
-
-function onError(message) {
-  console.error(message);
-};
-
-
-function onSuccess(dataJson){
-	var responseObj = dataJson;
-
-	return;
-};
-
-window.load = {
-	URL : URL,
-	load : load
-};
-
-//window.load('https://js.dump.academy/keksobooking/data', onSuccess, onError);
 })();
